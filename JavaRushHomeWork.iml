@@ -22,5 +22,15 @@
         <jarDirectory url="file://$MODULE_DIR$/lib/junit-4.12" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/slf4j" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib/slf4j" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

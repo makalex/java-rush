@@ -1,5 +1,8 @@
 package com.javarush.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,22 +12,6 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-//        String s1 = "hello";
-//        String s2 = "hello";
-//
-//        String s3 = new String("hello");
-//        String s4 = new String("hello");
-//
-//        System.out.println(s1==s2);
-//        System.out.println(s3==s4);
-
-//
-//        List<Integer> l = new ArrayList<Integer>();
-//        l.add(1);
-//        l.add(3);
-//        l.add(5);
-//
-//        l.remove(1);
 
 //        StackTraceElement[] ste = Thread.currentThread().getStackTrace();
 //        for (StackTraceElement s : ste) {
@@ -50,7 +37,9 @@ public class Test {
 
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-        //StackTraceElement;
+
+        Logger logger = LoggerFactory.getLogger(Test.class);
+        logger.info("Hello");
     }
 
 
