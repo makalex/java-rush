@@ -2,8 +2,8 @@
 
 # IntelliJ
 .idea/
-out/
 
+target/
 logs/
 
 *.properties
