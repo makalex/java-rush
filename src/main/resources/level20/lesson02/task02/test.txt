@@ -1,0 +1,12 @@
+USER
+	FirstName:alex
+	LastName:mak
+	Male:false
+	BD:1423840524950
+	Country:UKRAINE
+USER
+	FirstName:alex2
+	LastName:null
+	Male:false
+	BD:1423840524951
+	Country:null
