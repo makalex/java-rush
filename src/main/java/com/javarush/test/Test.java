@@ -3,6 +3,7 @@ package com.javarush.test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Externalizable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
