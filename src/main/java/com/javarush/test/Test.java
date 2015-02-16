@@ -38,10 +38,8 @@ public class Test {
 
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-
         Logger logger = LoggerFactory.getLogger(Test.class);
         logger.info("Hello");
+
     }
-
-
 }
