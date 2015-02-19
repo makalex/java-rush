@@ -10,6 +10,9 @@ package com.javarush.test.level22.lesson05.task01;
 */
 public class Solution {
     public static String getPartOfString(String string) {
+        if (string == null)
+            throw new TooShortStringException();
+
         int startIdx = string.indexOf(' ');
         if (startIdx < 0) throw new TooShortStringException();
         int endIdx = string.indexOf(' ');
@@ -27,7 +30,8 @@ public class Solution {
 
     public static void main(String[] args) {
         System.out.println(getPartOfString("JavaRush - лучший сервис обучения Java."));
-        System.out.println(getPartOfString("JavaRush - лучший"));
+        //System.out.println(getPartOfString("JavaRush - лучший"));
+        System.out.println(getPartOfString(null));
     }
 
     public static class TooShortStringException extends RuntimeException {
