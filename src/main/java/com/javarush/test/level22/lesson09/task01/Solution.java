@@ -16,25 +16,29 @@ public class Solution {
     public static List<Pair> result = new LinkedList<>();
 
     public static void main(String[] args) throws Exception {
+        // src/test/resources/level22/lesson09/task01/t1.txt
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         String fileName = console.readLine();
         BufferedReader fReader = new BufferedReader(new FileReader(fileName));
-        List<String> words = new ArrayList<>();
+        Set<String> uniqueWords = new HashSet<>();
         while (fReader.ready()) {
             String[] splitterWords = fReader.readLine().split(" ");
-            words.addAll(Arrays.asList(splitterWords));
+            uniqueWords.addAll(Arrays.asList(splitterWords));
         }
         fReader.close();
 
-        Set<String> set = new HashSet<>();
-        for (String word : words) {
+        List<String> pairedWordsList = new ArrayList<>();
+        Iterator<String> iter = uniqueWords.iterator();
+        while (iter.hasNext()) {
+            String word = iter.next();
             String reversedWord = new StringBuilder(word).reverse().toString();
-            if (words.contains(word) && words.contains(reversedWord)) {
-                set.add(word);
+            iter.remove();
+            if (uniqueWords.contains(reversedWord)) {
+                pairedWordsList.add(word);
             }
         }
 
-        for (String word : set) {
+        for (String word : pairedWordsList) {
             Pair pair = new Pair();
             pair.first = word;
             pair.second = new StringBuilder(word).reverse().toString();
@@ -52,8 +56,6 @@ public class Solution {
                     first == null && second != null ? second :
                     second == null && first != null ? first :
                     first.compareTo(second) < 0 ? first + " " + second : second + " " + first;
-
         }
     }
-
 }

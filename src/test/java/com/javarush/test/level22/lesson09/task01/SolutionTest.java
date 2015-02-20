@@ -7,8 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SolutionTest extends TestCase {
 
@@ -40,18 +39,16 @@ public class SolutionTest extends TestCase {
         pair2.first = "123";
         pair2.second = "321";
 
-        List<Solution.Pair> expected = new LinkedList<>();
-        expected.add(pair1);
-        expected.add(pair2);
+        Set<String> expected = new HashSet<>();
+        expected.add(pair1.toString());
+        expected.add(pair2.toString());
 
-        List<Solution.Pair> actual = Solution.result;
-
-        for (int i = 0; i < expected.size(); i++) {
-            System.out.println(expected.get(i).toString() + " " + actual.get(i).toString());
-//            Assert.assertEquals(
-//                    expected.get(i).toString(),
-//                    actual.get(i).toString()
-//            );
+        Set<String> actual = new HashSet<>();
+        for (Solution.Pair pair : Solution.result) {
+            actual.add(pair.toString());
         }
+
+        Assert.assertEquals(expected, actual);
+
     }
 }
