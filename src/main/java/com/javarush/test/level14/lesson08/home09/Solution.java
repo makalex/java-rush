@@ -19,7 +19,7 @@ import java.util.List;
 */
 
 public class Solution {
-    /*
+
     public static void main(String[] args) {
         Person ivan = new Person("Иван");
         for (Money money : ivan.getAllMoney()) {
@@ -43,6 +43,6 @@ public class Solution {
         public List<Money> getAllMoney() {
             return allMoney;
         }
-    }*/
+    }
 }
 

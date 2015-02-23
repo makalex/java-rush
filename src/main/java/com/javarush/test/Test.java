@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 import java.io.Externalizable;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.text.ChoiceFormat;
+import java.text.Format;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,16 +33,25 @@ public class Test {
 
         // System.out.println(Charset.defaultCharset());
 
-        System.out.println(Double.toHexString(123));
-        System.out.println(Integer.toBinaryString(1111111223));
-
-        List<Integer> in = new ArrayList<>();
-        in.add(12);
-        List<?> list = new ArrayList<>(in);
-        list.get(0);
+        printMessageFormat();
     }
 
+    static void printMessageFormat() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+        double[] filelimits = {0d, new Date().getTime()};
+        String[] filepart = {"closed {4}", "open {2} and last {3}"};
+
+        ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
+        Format[] testFormats = {null, null, dateFormat, fileform, null, null, null};
+        MessageFormat pattform = new MessageFormat("{0}   {1} | {5} {6}");
+        pattform.setFormats(testFormats);
+
+        Date date = new Date();
+        Object[] testArgs = {"name", "symbol", 123.2, 1234.4, 33.3, date, date.getTime()};
+        System.out.println(pattform.format(testArgs));
+
+    }
 
     static void printAvailableCharsets() {
         Map<String, Charset> encodings = Charset.availableCharsets();

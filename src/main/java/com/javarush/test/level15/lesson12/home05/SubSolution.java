@@ -1,7 +1,8 @@
 package com.javarush.test.level15.lesson12.home05;
 
-public class SubSolution {
-/*
+
+public class SubSolution extends Solution{
+
     public SubSolution() {
         super();
     }
@@ -39,5 +40,5 @@ public class SubSolution {
     }
     private SubSolution(String a, String b) {
     }
-    private SubSolution(String a, String b, String c) {}*/
+    private SubSolution(String a, String b, String c) {}
 }

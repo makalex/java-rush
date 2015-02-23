@@ -6,7 +6,6 @@ package com.javarush.test.level15.lesson04.task04;
 3. Реализация метода printName должна быть одна.
 */
 
-import java.util.Map;
 
 public class Solution {
     public static void main(String[] args) {
