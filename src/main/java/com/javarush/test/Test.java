@@ -32,8 +32,19 @@ public class Test {
         //System.out.println(clazz.newInstance());
 
         // System.out.println(Charset.defaultCharset());
+        // printMessageFormat();
 
-        printMessageFormat();
+
+        System.out.println(sleepInterval(1));
+        System.out.println(sleepInterval(10));
+        System.out.println(sleepInterval(11));
+        System.out.println(sleepInterval(23));
+    }
+
+    public static int sleepInterval(int snakeLen) {
+        int pause = 500 - (int) Math.round((snakeLen - 1) * 22.2);
+        pause = pause < 200 ? 200 : pause;
+        return pause;
     }
 
     static void printMessageFormat() {
@@ -50,7 +61,6 @@ public class Test {
         Date date = new Date();
         Object[] testArgs = {"name", "symbol", 123.2, 1234.4, 33.3, date, date.getTime()};
         System.out.println(pattform.format(testArgs));
-
     }
 
     static void printAvailableCharsets() {
