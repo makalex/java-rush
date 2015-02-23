@@ -1,6 +1,8 @@
 package com.javarush.test.level26.lesson15.big01;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Set;
  */
 public class CurrencyManipulatorFactory {
 
-    private static Set<CurrencyManipulator> currencyManipulators = new HashSet<>();
+    private static List<CurrencyManipulator> currencyManipulators = new ArrayList<>();
 
     // private
     private CurrencyManipulatorFactory() {
@@ -24,5 +26,9 @@ public class CurrencyManipulatorFactory {
         CurrencyManipulator res = new CurrencyManipulator(currencyCode);
         currencyManipulators.add(res);
         return res;
+    }
+
+    public static List<CurrencyManipulator> getAllCurrencyManipulators() {
+        return currencyManipulators;
     }
 }

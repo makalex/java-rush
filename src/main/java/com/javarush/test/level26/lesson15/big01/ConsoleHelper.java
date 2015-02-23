@@ -25,12 +25,15 @@ public class ConsoleHelper {
         return line;
     }
 
-    public static String askCurrencyCode() throws IOException {
+    public static String askCurrencyCode() {
         System.out.println("Enter currency code...");
         String currCode = null;
-        while ((currCode = console.readLine()).length() != 3) {
-            System.out.println("Error. Try again...");
+        try {
+            while ((currCode = console.readLine()).length() != 3) {
+                System.out.println("Error. Try again...");
+            }
         }
+        catch (IOException e) {}
         return currCode.toUpperCase();
     }
 

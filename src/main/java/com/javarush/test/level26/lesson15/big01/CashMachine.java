@@ -11,13 +11,19 @@ public class CashMachine {
     public static void main(String[] args) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
 
-        // Считаем с консоли код валюты, потом считаем номинал и количество банкнот, а потом добавим их в манипулятор.
-        String currCode = ConsoleHelper.askCurrencyCode();
-        String[] den = ConsoleHelper.getValidTwoDigits(currCode);
-        CurrencyManipulator currencyManipulator = new CurrencyManipulator(currCode);
+        Operation operation;
+        do {
+            int operationOrdinal = Integer.parseInt(ConsoleHelper.readString());
+            operation = Operation.getAllowableOperationByOrdinal(operationOrdinal);
+            CommandExecutor.execute(operation);
+        } while (operation != Operation.EXIT);
 
-        currencyManipulator.addAmount(Integer.parseInt(den[0]), Integer.parseInt(den[1]));
-        currencyManipulator.getTotalAmount();
+
+        // Считаем с консоли код валюты, потом считаем номинал и количество банкнот, а потом добавим их в манипулятор.
+//
+//
+//        currencyManipulator.addAmount(Integer.parseInt(den[0]), Integer.parseInt(den[1]));
+//        currencyManipulator.getTotalAmount();
 
     }
 }
