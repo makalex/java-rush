@@ -1,34 +1,31 @@
 package com.javarush.test.level26.lesson15.big01;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by MakarytskyiO on 23.02.2015.
  */
 public class CurrencyManipulatorFactory {
 
-    private static List<CurrencyManipulator> currencyManipulators = new ArrayList<>();
+    private static Map<String, CurrencyManipulator> currencyManipulators = new HashMap<>();
 
     // private
     private CurrencyManipulatorFactory() {
     }
 
     public static CurrencyManipulator getManipulatorByCurrencyCode(String currencyCode) {
-        for (CurrencyManipulator cm : currencyManipulators) {
-            if (cm.getCurrencyCode().equals(currencyCode)) {
-                return cm;
-            }
+        if (currencyManipulators.containsKey(currencyCode)) {
+            return currencyManipulators.get(currencyCode);
+        } else {
+            CurrencyManipulator newCurrencyManipulator = new CurrencyManipulator(currencyCode);
+            currencyManipulators.put(currencyCode, newCurrencyManipulator);
+            return newCurrencyManipulator;
         }
-
-        CurrencyManipulator res = new CurrencyManipulator(currencyCode);
-        currencyManipulators.add(res);
-        return res;
     }
 
-    public static List<CurrencyManipulator> getAllCurrencyManipulators() {
-        return currencyManipulators;
+    public static Collection<CurrencyManipulator> getAllCurrencyManipulators()
+    {
+        return currencyManipulators.values();
     }
+
 }

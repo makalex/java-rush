@@ -7,11 +7,35 @@ package com.javarush.test.level27.lesson06.task01;
 Изменения вносите только в safeMethod.
 */
 public class Solution {
+
+    private static final Object tieLock = new Object();
+
     public void safeMethod(Object obj1, Object obj2) {
-        synchronized (obj1) {
-            longTimeMethod();
+        int hash1 = System.identityHashCode(obj1);
+        int hash2 = System.identityHashCode(obj2);
+        if (hash1 < hash2) {
+            synchronized (obj1) {
+                longTimeMethod();
+                synchronized (obj2) {
+                    unsafeMethod(obj1, obj2);
+
+                }
+            }
+        } else if (hash1 > hash2) {
             synchronized (obj2) {
-                unsafeMethod(obj1, obj2);
+                longTimeMethod();
+                synchronized (obj1) {
+                    unsafeMethod(obj1, obj2);
+                }
+            }
+        } else {
+            synchronized (tieLock) {
+                synchronized (obj1) {
+                    longTimeMethod();
+                    synchronized (obj2) {
+                        unsafeMethod(obj1, obj2);
+                    }
+                }
             }
         }
     }

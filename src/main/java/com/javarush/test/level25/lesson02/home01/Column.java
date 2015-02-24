@@ -1,7 +1,6 @@
 package com.javarush.test.level25.lesson02.home01;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public enum Column implements Columnable {
     Customer("Customer"),
@@ -49,11 +48,15 @@ public enum Column implements Columnable {
      * @return список колонок
      */
     public static List<Column> getVisibleColumns() {
-        List<Column> result = new LinkedList<>();
-        for (Column column : values()) {
-            if (column.isShown()) {
-                result.add(0, column);
-            }
+        List<Column> result = new ArrayList<>();
+        Map<Integer, Column> map = new TreeMap<>();
+        for (int i = 0; i < realOrder.length; i++) {
+            map.put(realOrder[i], Column.values()[i]);
+        }
+
+        for (Map.Entry<Integer, Column> entry : map.entrySet()){
+            if (entry.getKey() != -1)
+                result.add(entry.getValue());
         }
         return result;
     }
