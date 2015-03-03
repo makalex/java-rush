@@ -9,9 +9,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by MakarytskyiO on 23.02.2015.
- */
 public class ConsoleHelper {
     private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "common_en");
 

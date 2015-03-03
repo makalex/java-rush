@@ -1,44 +1,126 @@
 package com.javarush.test;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.Externalizable;
+import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.*;
 import java.lang.reflect.Field;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.text.ChoiceFormat;
 import java.text.Format;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/**
- * Created by MakarytskyiO on 19.01.2015.
- */
 public class Test {
     public static void main(String[] args) throws Exception {
+        //systemProperties();
+        //testJsoup();
+        System.out.println(getVacancies("test"));
+    }
 
-//        StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-//        for (StackTraceElement s : ste) {
-//            System.out.println(s.getMethodName());
-//        }
+    public static List<Vacancy> getVacancies(String searchString) {
+        List<Vacancy> vacancies = new ArrayList<>();
+        try {
+            final String vacancyAttr = "vacancy-serp__vacancy";
+            int pageNumber = 0;
+            Document doc;
+            while ((doc = getDocument(searchString, pageNumber++)) != null) {
+                //System.out.println(doc);
+                //Elements elements = doc.select("tr["+vacancyAttr+"]");
+                Elements elements = doc.select("[data-qa=vacancy-serp__vacancy]");
+                for (Element element : elements) {
+                    System.out.println(element);
+                }
 
-        //Logger logger = LoggerFactory.getLogger(Test.class);
-        //logger.info("Hello");
-        //Class<?> clazz = Class.forName("java.lang.Integer");
-        //System.out.println(clazz.newInstance());
+                break;
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vacancies;
+    }
 
-        // System.out.println(Charset.defaultCharset());
-        // printMessageFormat();
+    protected static Document getDocument(String searchString, int page) throws IOException {
+        //Document document = Jsoup.parse(new File("src/main/resources/level28/lesson15/big01/big28data.html"), "UTF-8", "none");
+        /*??*/System.setProperty("http.proxyHost", "127.0.0.1");
+        /*??*/System.setProperty("http.proxyPort", "9666");
+
+        /*?*/String URL_FORMAT = "http://javarush.ru/testdata/big28data.html?text=java+%s&page=%d";
+        String url = String.format(URL_FORMAT, searchString, page);
+        Document document = Jsoup.connect(url)
+        /*???*/.timeout(20 * 1000)
+                    .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                    .referrer("none")
+                    .get();
+
+        return document;
+    }
 
 
-        System.out.println(sleepInterval(1));
-        System.out.println(sleepInterval(10));
-        System.out.println(sleepInterval(11));
-        System.out.println(sleepInterval(23));
+    private static void systemProperties() {
+        Properties props = System.getProperties();
+        Enumeration keys = props.keys();
+        while (keys.hasMoreElements()) {
+            String key = (String)keys.nextElement();
+            String value = (String)props.get(key);
+            System.out.println(key + ": " + value);
+        }
+    }
+
+    private static void testJsoup() {
+        System.setProperty("http.proxyHost", "127.0.0.1");
+        System.setProperty("http.proxyPort", "9666");
+
+        String URL_FORMAT = "http://hh.ua/search/vacancy?text=java+%s&page=%d";
+        String url = "http://javarush.ru/testdata/big28data.html";
+        //String url = String.format(URL_FORMAT, "Киев", 1);
+        try {
+            Document doc = Jsoup.connect(url)
+                            .timeout(20 * 1000)
+                            .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                            .referrer("none")
+                            .get();
+            String text = doc.html();
+            System.out.println(text);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //System.setProperty("http.proxyHost", null);
+        //System.setProperty("http.proxyPort", null);
+    }
+
+    private static void HttpGet() throws Exception {
+        //Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy.delta.internal", 8080));
+        //URL url = new URL("http://www.google.com.ua");
+        URL url = new URL("http://hh.ua/search/vacancy?text=java+%s&page=%d");
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 9666));
+
+        URLConnection connection = url.openConnection(proxy);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+        String fileName = "src/main/resources/level28/lesson15/big01/test2.html";
+        BufferedWriter fWriter = new BufferedWriter(new FileWriter(fileName));
+
+        String inputLine;
+        while ((inputLine = reader.readLine()) != null) {
+            fWriter.write(inputLine);
+            fWriter.newLine();
+        }
+        reader.close();
+        fWriter.close();
     }
 
     public static int sleepInterval(int snakeLen) {
