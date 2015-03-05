@@ -29,18 +29,31 @@ public class HHStrategy implements Strategy {
                 if (elements.size() == 0) break;
 
                 for (Element element : elements) {
+                    // title
                     Element titleElement = element.select("[data-qa=vacancy-serp__vacancy-title]").first();
                     String title = titleElement.text();
+
+                    // salary
                     Element salaryElement = element.select("[data-qa=vacancy-serp__vacancy-compensation]").first();
                     String salary = "";
                     if (salaryElement != null) {
                         salary = salaryElement.text();
                     }
+
+                    // city
                     String city = element.select("[data-qa=vacancy-serp__vacancy-address]").first().text();
+
+                    // company
                     String companyName = element.select("[data-qa=vacancy-serp__vacancy-employer]").first().text();
+
+                    // site
                     String siteName = "http://hh.ua/";
+
+                    // url
                     String url = titleElement.attr("href");
 
+
+                    // add vacancy to the list
                     Vacancy vacancy = new Vacancy();
                     vacancy.setTitle(title);
                     vacancy.setSalary(salary);
@@ -71,10 +84,9 @@ public class HHStrategy implements Strategy {
     }
 
     protected Document getDocument(String searchString, int page) throws IOException {
+        // proxy settings
         /*??*/ //System.setProperty("http.proxyHost", "127.0.0.1");
         /*??*/ //System.setProperty("http.proxyPort", "9666");
-
-        /*???*/// String URL_FORMAT = "http://javarush.ru/testdata/big28data.html?text=java+%s&page=%d";
 
         String url = String.format(URL_FORMAT, searchString, page);
         Document document = Jsoup.connect(url)

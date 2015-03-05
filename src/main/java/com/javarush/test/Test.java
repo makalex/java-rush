@@ -23,9 +23,9 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        //systemProperties();
-        //testJsoup();
-        System.out.println(getVacancies("test"));
+        Integer x = 50;
+        Integer y = 50;
+        System.out.println(x == y);
     }
 
     public static List<Vacancy> getVacancies(String searchString) {
