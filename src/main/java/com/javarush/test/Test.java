@@ -15,6 +15,8 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ChoiceFormat;
 import java.text.Format;
 import java.text.MessageFormat;
@@ -26,6 +28,9 @@ public class Test {
         Integer x = 50;
         Integer y = 50;
         System.out.println(x == y);
+
+        Files.readAllLines(Paths.get(""));
+
     }
 
     public static List<Vacancy> getVacancies(String searchString) {
