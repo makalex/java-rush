@@ -4,11 +4,12 @@ package com.javarush.test.level27.lesson15.big01;
 import com.javarush.test.level27.lesson15.big01.kitchen.Order;
 
 import java.io.IOException;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Tablet {
-    private final static Logger log = Logger.getLogger(Tablet.class.getName());
+public class Tablet extends Observable {
+    final static Logger logger = Logger.getLogger(Tablet.class.getName());
     private final int number;
 
     public Tablet(int number) {
@@ -18,14 +19,23 @@ public class Tablet {
     public void createOrder() {
         try {
             Order order = new Order(this);
-            ConsoleHelper.writeMessage(order.toString());
+            if (!order.isEmpty()) {
+                ConsoleHelper.writeMessage(order.toString());
+                setChanged();
+                notifyObservers(order);
+            }
         }
         catch (IOException e) {
-            log.log(Level.SEVERE, "Console is unavailable.");
+            logger.log(Level.SEVERE, "Console is unavailable.");
         }
     }
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "Tablet{number=" + number + "}";
     }
 }

@@ -23,14 +23,20 @@ public class ConsoleHelper {
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> dishes = new ArrayList<>();
-        writeMessage("Enter dish...");
         String str;
+        writeMessage("Enter dish...(" + Dish.allDishesToString() + ")");
         while (true) {
             str = readString();
             if ("exit".equals(str)) {
                 break;
             }
-            dishes.add(Dish.valueOf(str));
+
+            try {
+                dishes.add(Dish.valueOf(str));
+            }
+            catch (IllegalArgumentException e) {
+                ConsoleHelper.writeMessage(str + " is not detected");
+            }
         }
         return dishes;
     }

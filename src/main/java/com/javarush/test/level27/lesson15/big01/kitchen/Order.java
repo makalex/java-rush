@@ -18,12 +18,22 @@ public class Order {
 
     @Override
     public String toString() {
-        String result;
-        if (dishes == null || dishes.size() == 0) {
-            result = "";
+        if (dishes == null || dishes.isEmpty()) {
+            return "";
         } else {
-            result = dishes.toString() + " of Tablet[number=" + tablet.getNumber() + "]";
+            return "Your order: " + dishes.toString() + " of " + tablet;
         }
-        return result;
+    }
+
+    public int getTotalCookingTime() {
+        int totalDuration = 0;
+        for (Dish dish : dishes) {
+            totalDuration += dish.getDuration();
+        }
+        return totalDuration;
+    }
+
+    public boolean isEmpty() {
+        return dishes == null || dishes.isEmpty();
     }
 }
