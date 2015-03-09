@@ -7,16 +7,16 @@ package com.javarush.test.level17.lesson10.home04;
 public class Solution {
     private double param = Math.random();
 
-    private synchronized void method0() {
+    private void method0() {
         double i = method3();
     }
 
-    protected void method1(String param1) {
+    protected synchronized void method1(String param1) {
         Solution solution = new Solution();
         solution.method0();
     }
 
-    public void  method2(int param1) {
+    public void method2(int param1) {
         param1++;
     }
 

@@ -9,12 +9,11 @@ public class Solution {
     int count;
 
     public Solution append(CharSequence s) {
-        synchronized (Solution.class) {
+
             if (s == null) {
 
                     s = "null";
-
-            }
+                }
 
             if (s instanceof String) {
 
@@ -25,9 +24,9 @@ public class Solution {
             if (s instanceof Solution) {
 
                     return this.appendThis((Solution) s);
+                }
 
-            }
-        }
+
         return this.append(s);
     }
 
@@ -56,8 +55,10 @@ public class Solution {
     }
 
     private void readObject(java.io.ObjectInputStream s) throws java.io.IOException, ClassNotFoundException {
+
             java.io.ObjectInputStream.GetField fields = s.readFields();
             value = (char[]) fields.get("value", null);
             count = fields.get("count", 0);
+
     }
 }
