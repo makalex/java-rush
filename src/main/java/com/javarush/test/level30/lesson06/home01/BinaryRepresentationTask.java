@@ -15,13 +15,16 @@ public class BinaryRepresentationTask extends RecursiveTask {
     protected String compute() {
         int a = i % 2;
         int b = i / 2;
+        if (i > 0) {
+
+            //result += task.join();
+        }
+
+
         String result = String.valueOf(a);
         BinaryRepresentationTask task = new BinaryRepresentationTask(a);
         task.fork();
-        if (b > 0)
-        {
-            //return task.join();
-        }
+
         return result;
     }
 }

@@ -3,9 +3,6 @@ package com.javarush.test.level27.lesson15.big01.ad;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by MakarytskyiO on 02.03.2015.
- */
 class AdvertisementStorage {
 
     private static AdvertisementStorage instance;

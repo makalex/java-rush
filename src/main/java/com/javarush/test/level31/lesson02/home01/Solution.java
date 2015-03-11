@@ -35,7 +35,7 @@ public class Solution {
             File child = stack.pop();
             if (child.isDirectory()) {
                 if (child.listFiles() == null) {
-                    // delete directory
+                    // 2.3 delete directory if it is empty
                     child.delete();
                 } else {
                     for (File f : child.listFiles()) {
@@ -44,6 +44,7 @@ public class Solution {
                 }
             } else if (child.isFile()) {
                 if (child.length() > 50) {
+                    // 2.2 delete file if it's length > 50 bytes
                     child.delete();
                 } else {
                     //

@@ -26,12 +26,12 @@ package com.javarush.test.level22.lesson13.task03;
 public class Solution {
 
     public static boolean checkTelNumber(String telNumber) {
-        if (telNumber.matches("+") ||
-            telNumber.matches("") ||
-            telNumber.matches(""))
+        if ((telNumber.matches("^[\\+]([^\\d]*\\d[^\\d]*){12}]?") || telNumber.matches("(^\\(?\\d)+([\\(,\\),\\-]?\\d{1}[\\(,\\),\\-]?){8}\\d$"))
+                && telNumber.matches("^(\\+)?(\\d)*(\\(\\d{3}\\))?(\\d+-?\\d+-?)?\\d+$"))
         {
             return true;
         }
+
         return false;
     }
 }

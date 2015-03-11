@@ -87,10 +87,8 @@ public class ConsoleHelper {
         return array;
     }
 
-    public static Operation askOperation() throws InterruptOperationException
-    {
-        while (true)
-        {
+    public static Operation askOperation() throws InterruptOperationException {
+        while (true) {
             String line = readString();
             if (checkWithRegExp(line))
                 return Operation.getAllowableOperationByOrdinal(Integer.parseInt(line));
@@ -100,10 +98,9 @@ public class ConsoleHelper {
 
     }
 
-    public static boolean checkWithRegExp(String Name)
-    {
+    public static boolean checkWithRegExp(String name) {
         Pattern p = Pattern.compile("^[1-4]$");
-        Matcher m = p.matcher(Name);
+        Matcher m = p.matcher(name);
         return m.matches();
     }
 

@@ -7,6 +7,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -30,6 +32,7 @@ public class Test {
         System.out.println(x == y);
 
         Files.readAllLines(Paths.get(""));
+
 
     }
 

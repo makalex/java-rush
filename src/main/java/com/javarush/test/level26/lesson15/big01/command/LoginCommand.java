@@ -43,6 +43,5 @@ public class LoginCommand implements Command {
 
             break;
         }
-
     }
 }

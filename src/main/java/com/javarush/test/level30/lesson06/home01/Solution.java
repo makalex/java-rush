@@ -10,6 +10,7 @@ import java.util.concurrent.ForkJoinPool;
 4. Пример функциональной реализации - метод binaryRepresentationMethod.
 */
 public class Solution {
+
     private String binatyRepresentationMethod(int x) {
         int a = x % 2;
         int b = x / 2;
@@ -22,12 +23,12 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String result1 = solution.binatyRepresentationMethod(6);
+        String result1 = solution.binatyRepresentationMethod(116);
         System.out.println(result1);
 
         System.out.println();
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        String result2 = (String)forkJoinPool.invoke(new BinaryRepresentationTask(6));
+        String result2 = (String)forkJoinPool.invoke(new BinaryRepresentationTask(116));
         System.out.println(result2);
     }
 }
