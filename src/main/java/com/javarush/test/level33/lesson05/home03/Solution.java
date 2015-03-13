@@ -1,6 +1,5 @@
 package com.javarush.test.level33.lesson05.home03;
 
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -15,9 +14,7 @@ import java.io.IOException;
 */
 public class Solution {
 
-    public static <T> T convertFromJsonToNormal(String fileName, Class<T> clazz)
-            throws IOException
-    {
+    public static <T> T convertFromJsonToNormal(String fileName, Class<T> clazz) throws IOException {
         ObjectMapper om = new ObjectMapper();
         return om.readValue(new File(fileName), clazz);
     }

@@ -15,8 +15,7 @@ public class Solution {
         FileInputStream fileInputStream = null;
         String fileName = null;
         while (true) {
-            try
-            {
+            try {
                 fileName = bufferedReader.readLine();
                 fileInputStream = new FileInputStream(fileName);
                 fileInputStream.read();

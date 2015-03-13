@@ -12,10 +12,7 @@ import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,12 +24,8 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Integer x = 50;
-        Integer y = 50;
-        System.out.println(x == y);
-
-        Files.readAllLines(Paths.get(""));
-
+        InetAddress inetAddress = InetAddress.getByName("kvhoit31");
+        System.out.println(inetAddress);
 
     }
 
