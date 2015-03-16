@@ -1,10 +1,10 @@
 package com.javarush.test.level31.lesson02.home01;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 /* Проход по дереву файлов
 1. На вход метода main подаются два параметра.
@@ -19,39 +19,70 @@ import java.util.Stack;
 Все файлы имеют расширение txt.
 */
 public class Solution {
-    public static void main(String[] args) throws Exception {
-        String dirPath = args[0];
+    public static void main(String[] args) throws IOException {
+        String directoryPath = args[0];
         String resultFileAbsolutePath = args[1];
+        //String directoryPath = "src/main/resources/level31/lesson02/home01";
+        //String resultFileAbsolutePath = "src/main/resources/level31/lesson02/home01/res.txt";
+        String allFilesContent = "allFilesContent.txt";
 
-        List<String> fileNames = getFileList(dirPath);
+        saveFilesLessThan50Bytes(directoryPath);
+
+        // rename file
+        Path source = Paths.get(resultFileAbsolutePath);
+        Path newResPath = Files.move(source, source.resolveSibling(allFilesContent));
+
+        // delete resultFileAbsolutePath if list contains it
+        lessThan50BytesFiles.remove(new File(resultFileAbsolutePath));
+
+        // sort file by name
+        Collections.sort(lessThan50BytesFiles, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                String fileName1 = o1.getName();
+                String fileName2 = o2.getName();
+                return fileName1.compareTo(fileName2);
+            }
+        });
+
+        // write to result file
+        BufferedWriter fout = new BufferedWriter(new FileWriter(newResPath.toFile()));
+        for (File file : lessThan50BytesFiles) {
+            BufferedReader fin = new BufferedReader(new FileReader(file));
+            while (fin.ready()) {
+                fout.write(fin.readLine());
+                fout.newLine();
+            }
+            fin.close();
+        }
+        fout.close();
     }
 
-    public static List<String> getFileList(String root) throws IOException {
-        List<String> fileList = new ArrayList<>();
-        Stack<File> stack = new Stack<>();
-        File rootDir = new File(root);
-        stack.push(rootDir);
-        while (!stack.isEmpty()) {
-            File child = stack.pop();
-            if (child.isDirectory()) {
-                if (child.listFiles() == null) {
-                    // 2.3 delete directory if it is empty
-                    child.delete();
+    private static List<File> lessThan50BytesFiles = new ArrayList<>();
+
+    private static void saveFilesLessThan50Bytes(String directory) {
+        File dir = new File(directory);
+        File[] files = dir.listFiles();
+
+        if (files == null) {
+            // it is not directory
+            return;
+        } else if (files.length == 0) {
+            // directory is empty
+            dir.delete();
+        } else {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // nested directory
+                    saveFilesLessThan50Bytes(file.getAbsolutePath());
                 } else {
-                    for (File f : child.listFiles()) {
-                        stack.push(f);
+                    if (file.length() > 50) {
+                        file.delete();
+                    } else {
+                        lessThan50BytesFiles.add(file);
                     }
-                }
-            } else if (child.isFile()) {
-                if (child.length() > 50) {
-                    // 2.2 delete file if it's length > 50 bytes
-                    child.delete();
-                } else {
-                    //
-                    fileList.add(child.getAbsolutePath());
                 }
             }
         }
-        return fileList;
     }
 }
