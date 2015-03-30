@@ -12,6 +12,7 @@ import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -24,8 +25,6 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        InetAddress inetAddress = InetAddress.getByName("kvhoit31");
-        System.out.println(inetAddress);
 
     }
 

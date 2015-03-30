@@ -70,7 +70,7 @@ public class Solution {
     }
 
     private static List<StringBuilder> readFileLines(String fileName) throws IOException {
-        List<StringBuilder> fileLines = new LinkedList<StringBuilder>();
+        List<StringBuilder> fileLines = new LinkedList<>();
         BufferedReader fReader = new BufferedReader(new FileReader(fileName));
         String str;
         while ((str = fReader.readLine()) != null) {
@@ -90,12 +90,10 @@ public class Solution {
     }
 
     private static String padRight(String input, int len) {
-        String res;
         if (input.length() < len) {
-            res = String.format("%1$-" + len + "s", input);
+            return String.format("%1$-" + len + "s", input);
         } else {
-            res = input.substring(0, len);
+            return input.substring(0, len);
         }
-        return res;
     }
 }

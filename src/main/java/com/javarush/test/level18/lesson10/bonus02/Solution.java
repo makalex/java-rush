@@ -41,21 +41,19 @@ public class Solution {
         fileWriter.close();
     }
 
-    private static String padRight(String input, int len) {
-        String res;
-        if (input.length() < len) {
-            res = String.format("%1$-" + len + "s", input);
+    private static String padRight(String input, int length) {
+        if (input.length() < length) {
+            return String.format("%1$-" + length + "s", input);
         } else {
-            res = input.substring(0, len);
+            return input.substring(0, length);
         }
-        return res;
     }
 
-    private static long getMaxId(String fileName) throws Exception {
+    private static long getMaxId(String fileName) throws IOException {
         BufferedReader fileReader = new BufferedReader(new FileReader(fileName));
-        String line;
         long maxId = 0;
         long currId;
+        String line;
         while ((line = fileReader.readLine()) != null) {
             currId = Integer.parseInt(line.substring(0, 8).trim());
             if (currId > maxId) {
